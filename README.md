@@ -23,5 +23,16 @@ lein deps
 ## Example
 
 ``` clojure
+(ns core
+  (:require [cljs-google-datastore.core :as datastore]))
 
+(defn- main []
+  (let [ds (datastore/datastore)
+        data [{:name "created",
+               :value (.toJSON (new js/Date))}
+              {:name "name",
+               :value "Google Cloud Datastore by cljs"}
+              {:name "url",
+               :value "https://github.com/avelino/cljs-google-datastore"}]]
+    (datastore/save ds "KEY-NAME" data)))
 ```
