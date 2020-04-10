@@ -1,7 +1,7 @@
 # Google Cloud Datastore
 Interoperability `@google-cloud/datastore` to cljs (_ClojureScript_)
 
-![Clojars cljs-google-datastore](https://clojars.org/cljs-google-datastore/latest-version.svg)
+[![Clojars Project](https://img.shields.io/clojars/v/cljs-google-datastore.svg)](https://clojars.org/cljs-google-datastore)
 
 ## Installation
 
