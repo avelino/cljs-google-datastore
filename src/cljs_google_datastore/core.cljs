@@ -9,6 +9,15 @@
   [ds, kind]
   (.key ds kind))
 
+(defn- make-filter
+  [ds, kind, filter, & {:keys [order, limit]}]
+  (let [query (.createQuery ds kind)]
+    query))
+
+(defn query
+  [ds, kind, filter]
+  (js->clj (.runQuery ds (make-filter ds kind filter))))
+
 (defn save
   [ds, kind, data]
   (let [entity {:key (make-key ds kind), :data data}]
