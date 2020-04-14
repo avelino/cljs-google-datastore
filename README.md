@@ -34,5 +34,11 @@ lein deps
                :value "Google Cloud Datastore by cljs"}
               {:name "url",
                :value "https://github.com/avelino/cljs-google-datastore"}]]
-    (datastore/save ds "KEY-NAME" data)))
+
+    ;; save data
+    (datastore/save ds "KEY-NAME" data)
+    
+    ;; get all records
+    (-> (datastore/query ds "KEY-NAME")
+        (.then (fn [r] (println r))))))
 ```
