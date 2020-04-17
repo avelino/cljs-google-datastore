@@ -9,22 +9,23 @@
   [ds, kind]
   (.key ds kind))
 
+
 (defn- make-filter
-  [ds, kind, filter, & {:keys [param-order, param-limit]}]
+  [ds, kind, filter, & {:keys [order, limit]}]
   (let [query (.createQuery ds kind)]
-    (if-not (empty? param-order)
-      (reset-meta! query
-                   (.order query param-order)))
-    (if-not (empty? param-limit)
-      (reset-meta! query
-                   (.limit query param-limit)))
-    query))
+    ;; order loop
+    (doseq [[k v] order]
+      (some-> query
+              (.order (name k) v)))
+    ;; limit
+    (some-> query
+            (.limit limit))))
 
 (defn query
-  [ds, kind, filter, & {:keys [param-order, param-limit]}]
+  [ds, kind, filter, & {:keys [order, limit]}]
   (js->clj (.runQuery ds (make-filter ds kind filter
-                                      :order param-order
-                                      :limit param-limit))))
+                                      :order order
+                                      :limit limit))))
 
 (defn save
   [ds, kind, data]

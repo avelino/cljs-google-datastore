@@ -39,6 +39,8 @@ lein deps
     (datastore/save ds "KEY-NAME" data)
     
     ;; get all records
-    (-> (datastore/query ds "KEY-NAME")
+    (-> (datastore/query ds "KEY-NAME"
+                         :order {:created {:descending false}}
+                         :limit 10)
         (.then (fn [r] (println r))))))
 ```
