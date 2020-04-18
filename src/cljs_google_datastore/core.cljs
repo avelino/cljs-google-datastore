@@ -14,7 +14,9 @@
 
 (defn save
   [ds, kind, data]
-  (let [entity {:key (make-key ds kind)
-                :data (make-data data)}]
-    (.save ds (clj->js entity))
-    entity))
+  (.save ds (clj->js {:key (maker/ds-key ds kind)
+                      :data (maker/ds-data data)})))
+
+(defn delete
+  [ds, kind, key]
+  (.delete ds (maker/ds-key ds kind :key key)))
