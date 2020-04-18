@@ -30,8 +30,12 @@
                                       :order order
                                       :limit limit))))
 
+(defn- make-data [data]
+  (map (fn [[k v]] {:name (name k) :value v}) data))
+
 (defn save
   [ds, kind, data]
-  (let [entity {:key (make-key ds kind), :data data}]
+  (let [entity {:key (make-key ds kind)
+                :data (make-data data)}]
     (.save ds (clj->js entity))
     entity))

@@ -28,12 +28,9 @@ lein deps
 
 (defn- main []
   (let [ds (datastore/datastore)
-        data [{:name "created",
-               :value (.toJSON (new js/Date))}
-              {:name "name",
-               :value "Google Cloud Datastore by cljs"}
-              {:name "url",
-               :value "https://github.com/avelino/cljs-google-datastore"}]]
+        data {:created (.toJSON (new js/Date))
+              :name "Google Cloud Datastore by cljs"
+              :url "https://github.com/avelino/cljs-google-datastore"}])
 
     ;; save data
     (datastore/save ds "KEY-NAME" data)
