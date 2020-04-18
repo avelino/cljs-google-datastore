@@ -13,8 +13,8 @@
                              :limit limit)))
 
 (defn save
-  [ds, kind, data]
-  (.save ds (clj->js {:key (maker/ds-key ds kind)
+  [ds, kind, data, & {:keys [key]}]
+  (.save ds (clj->js {:key (maker/ds-key ds kind :key key)
                       :data (maker/ds-data data)})))
 
 (defn delete

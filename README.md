@@ -36,11 +36,15 @@ lein deps
     (-> (datastore/save ds "KEY-NAME" data)
         (.then (fn [r] (prn r))))
 
-    ;; delete
+    ;; update data - key 123
+    (-> (datastore/save ds "KEY-NAME" data :key 123)
+        (.then (fn [r] (prn r))))
+
+    ;; delete - key 123
     (-> (datastore/delete ds "KEY-NAME" 123)
         (.then (fn [r] (prn r))))
     
-    ;; get all records
+    ;; get records -- apply filters
     (-> (datastore/query ds
                          "KEY-NAME"
                          {:created [">" (.toJSON (new js/Date "2020-04-03T00:00:00z"))]}
