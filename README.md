@@ -33,7 +33,12 @@ lein deps
               :url "https://github.com/avelino/cljs-google-datastore"}])
 
     ;; save data
-    (datastore/save ds "KEY-NAME" data)
+    (-> (datastore/save ds "KEY-NAME" data)
+        (.then (fn [r] (prn r))))
+
+    ;; delete
+    (-> (datastore/delete ds "KEY-NAME" 123)
+        (.then (fn [r] (prn r))))
     
     ;; get all records
     (-> (datastore/query ds
@@ -41,5 +46,5 @@ lein deps
                          {:created [">" (.toJSON (new js/Date "2020-04-03T00:00:00z"))]}
                          :order {:created {:descending false}}
                          :limit 10)
-        (.then (fn [r] (println r))))))
+        (.then (fn [r] (println r)))))
 ```

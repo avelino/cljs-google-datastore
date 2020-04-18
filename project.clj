@@ -1,4 +1,4 @@
-(defproject cljs-google-datastore "1.0.5"
+(defproject cljs-google-datastore "1.0.6"
   :description "Google Cloud Datastore client to ClojureScript"
   :url "https://github.com/avelino/cljs-google-datastore"
   :license {:name "The MIT License"
