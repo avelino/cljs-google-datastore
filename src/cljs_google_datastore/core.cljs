@@ -9,10 +9,13 @@
   [ds, kind]
   (.key ds kind))
 
-
 (defn- make-filter
   [ds, kind, filter, & {:keys [order, limit]}]
   (let [query (.createQuery ds kind)]
+    ;; filter loop
+    (doseq [[k v] filter]
+      (some-> query
+              (.filter (name k), (get v 0), (get v 1))))
     ;; order loop
     (doseq [[k v] order]
       (some-> query
