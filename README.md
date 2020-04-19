@@ -48,6 +48,7 @@ lein deps
     (-> (datastore/query ds
                          "KEY-NAME"
                          {:created [">" (.toJSON (new js/Date "2020-04-03T00:00:00z"))]}
+                         :group ["created"]
                          :order {:created {:descending false}}
                          :limit 10)
         (.then (fn [r] (println r)))))

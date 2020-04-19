@@ -7,10 +7,11 @@
   (new Datastore))
 
 (defn query
-  [ds, kind, filter, & {:keys [order, limit]}]
+  [ds, kind, filter, & {:keys [order, limit, group]}]
   (.runQuery ds (maker/ds-filter ds kind filter
                              :order order
-                             :limit limit)))
+                             :limit limit
+                             :group group)))
 
 (defn save
   [ds, kind, data, & {:keys [key]}]
