@@ -1,5 +1,6 @@
 (ns cljs-google-datastore.maker
-  (:require ["@google-cloud/datastore" :refer [Datastore]]))
+  (:require [cljs.core :refer [PersistentVector]]
+            ["@google-cloud/datastore" :refer [Datastore]]))
 
 (defn- ds-key
   [ds, kind, & {:keys [key]}]
@@ -10,8 +11,12 @@
   (let [query (.createQuery ds kind)]
     ;; filter loop
     (doseq [[k v] filter]
-      (some-> query
-              (.filter (name k), (get v 0), (get v 1))))
+      (if-not (instance? PersistentVector v)
+        (some-> query
+                (.filter (name k), (get v 0), (get v 1)))
+        (doseq [[sub-v] v]
+            (some-> query
+                (.filter (name k), (get sub-v 0), (get sub-v 1))))))
     ;; order loop
     (doseq [[k v] order]
       (some-> query (.order (name k) v)))

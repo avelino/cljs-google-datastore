@@ -47,7 +47,9 @@ lein deps
     ;; get records -- apply filters
     (-> (datastore/query ds
                          "KEY-NAME"
-                         {:created [">" (.toJSON (new js/Date "2020-04-03T00:00:00z"))]}
+                         {:created [[">" (.toJSON (new js/Date "2020-04-03T00:00:00z"))]
+                                    ["<" (.toJSON (new js/Date "2020-04-09T00:00:00z"))]]
+                          :active true}
                          :group ["created"]
                          :order {:created {:descending false}}
                          :limit 10)
