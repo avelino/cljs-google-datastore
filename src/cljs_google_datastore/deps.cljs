@@ -1,0 +1,1 @@
+{:npm-deps {"@google-cloud/datastore" "5.1.0"}}
